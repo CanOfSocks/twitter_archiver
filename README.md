@@ -27,3 +27,8 @@ There are many issue with this container and how it works. Improvements may or m
 Some main issues include:
 - Tweets only download the latest ~3200 tweets - This is due to using the "twitter-profile" scraper from snscrape (because I wanted retweets too) as it uses the Twitter API. The "twitter-user" may be able to get all, but this container was designed around the output of the "twitter-profile" scraper.
 - Poor resilience against errors - If media downloads fail for whatever reason and the container continues running, the new tweets will be merged into the current archive json file. To redownload from a certain time/date, the json file must be manually edited to remove any tweets up to the required date or the json deleted completely. If the container stops during collecting media, it should re-download the new media as it might not have merged yet.
+
+
+______________
+Todo
+- Add option to download liked tweets/media - requires twitter API token - considering using repo [Spark-NF/twitter_media_downloader](https://github.com/Spark-NF/twitter_media_downloader)
