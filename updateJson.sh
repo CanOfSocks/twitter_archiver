@@ -55,10 +55,17 @@ do
     snscrape --since "${dateSince}" --jsonl twitter-profile "${twitterUN}" > "${outFolder}/${twitterUN}-tweets.json.new"
 
     if [ -s "${outFolder}/${twitterUN}-tweets.json.new" ]; then
-      cp -f "${outFolder}/${twitterUN}-tweets.json" "${outFolder}/${twitterUN}-tweets.json.bkup"
-      /app/scripts/getMedia.sh "${outFolder}/${twitterUN}-tweets.json.new" "${outFolder}"
-      mv -f "${outFolder}/${twitterUN}-tweets.json.new" "${outFolder}/${twitterUN}-tweets.json"
-      cat "${outFolder}/${twitterUN}-tweets.json.bkup" >> "${outFolder}/${twitterUN}-tweets.json"
+      lineCount=$(wc -l < "${outFolder}/${twitterUN}-tweets.json.new")
+      lineOneNew=$(sed -n '1{p;q;}' "${outFolder}/${twitterUN}-tweets.json.new")
+      lineOneSource=$(sed -n '1{p;q;}' "${outFolder}/${twitterUN}-tweets.json")
+      if [ "$lineCount" -eq 1 ] && ["$lineOneNew" == "$lineOneSource"]; then
+        echo "Duplicate tweet downloaded - not saving to file"
+      else
+        cp -f "${outFolder}/${twitterUN}-tweets.json" "${outFolder}/${twitterUN}-tweets.json.bkup"
+        /app/scripts/getMedia.sh "${outFolder}/${twitterUN}-tweets.json.new" "${outFolder}"
+        mv -f "${outFolder}/${twitterUN}-tweets.json.new" "${outFolder}/${twitterUN}-tweets.json"
+        cat "${outFolder}/${twitterUN}-tweets.json.bkup" >> "${outFolder}/${twitterUN}-tweets.json"
+      fi
     fi
   fi
   sleep $(($interval))
