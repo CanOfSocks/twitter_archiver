@@ -56,9 +56,7 @@ do
 
     if [ -s "${outFolder}/${twitterUN}-tweets.json.new" ]; then
       lineCount=$(wc -l < "${outFolder}/${twitterUN}-tweets.json.new")
-      lineOneNew=$(sed -n '1{p;q;}' "${outFolder}/${twitterUN}-tweets.json.new")
-      lineOneSource=$(sed -n '1{p;q;}' "${outFolder}/${twitterUN}-tweets.json")
-      if [ "$lineCount" -eq 1 ] && ["$lineOneNew" == "$lineOneSource"]; then
+      if [ "$lineCount" -eq 1 ] && [[ $(head -1 "${outFolder}/${twitterUN}-tweets.json.new") = $(head -1 "${outFolder}/${twitterUN}-tweets.json") ]]; then
         echo "Duplicate tweet downloaded - not saving to file"
       else
         cp -f "${outFolder}/${twitterUN}-tweets.json" "${outFolder}/${twitterUN}-tweets.json.bkup"
