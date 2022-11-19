@@ -55,10 +55,10 @@ do
     snscrape --since "${dateSince}" --jsonl twitter-profile "${twitterUN}" > "${outFolder}/${twitterUN}-tweets.json.new"
 
     if [ -s "${outFolder}/${twitterUN}-tweets.json.new" ]; then
-      lineCount=$(wc -l < "${outFolder}/${twitterUN}-tweets.json.new")
+#      lineCount=$(wc -l < "${outFolder}/${twitterUN}-tweets.json.new")
 #      lineOneNew=$(sed -n '1{p;q;}' "${outFolder}/${twitterUN}-tweets.json.new")
 #      lineOneSource=$(sed -n '1{p;q;}' "${outFolder}/${twitterUN}-tweets.json")
-      if [ "$lineCount" -eq 1 ] && [[ $(jq -r '[.url] | @tsv' <<< $(head -1 "${outFolder}/${twitterUN}-tweets.json.new")) = $(jq -r '[.url] | @tsv' <<< $(head -1 "${outFolder}/${twitterUN}-tweets.json")) ]]; then
+      if [[ $(wc -l < "${outFolder}/${twitterUN}-tweets.json.new") -eq 1 ]] && [[ $(jq -r '[.url] | @tsv' <<< $(head -1 "${outFolder}/${twitterUN}-tweets.json.new")) = $(jq -r '[.url] | @tsv' <<< $(head -1 "${outFolder}/${twitterUN}-tweets.json")) ]]; then
         echo "Duplicate tweet downloaded - not saving to file"
       else
         cp -f "${outFolder}/${twitterUN}-tweets.json" "${outFolder}/${twitterUN}-tweets.json.bkup"
