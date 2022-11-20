@@ -4,6 +4,21 @@ if [[ -z "${interval}" ]]; then
   interval=60
 fi
 
+#If all API requirements exist, make file, otherwise attempt removal of any auth present
+if [[ -n "${apiKey}" ]] \
+ && [[ -n "${apiSec}" ]] \
+ && [[ -n "${accessToken}" ]] \
+ && [[ -n "${accessSec}" ]]; then
+  (echo "{" > /app/scripts/.oauth.json \
+  && echo '    "consumer_key": "${apiKey}",' >> /app/scripts/.oauth.json \
+  && echo '    "consumer_secret": "${apiKey}",' >> /app/scripts/.oauth.json \
+  && echo '    "access_token": "${apiKey}",' >> /app/scripts/.oauth.json \
+  && echo '    "access_key": "${apiKey}",' >> /app/scripts/.oauth.json \
+  && echo "}" >> /app/scripts/.oauth.json) || rm /app/scripts/.oauth.json 2> /dev/null
+else
+  rm /app/scripts/.oauth.json 2> /dev/null
+fi
+
 unameA=($usernames)
 
 for u in ${unameA[@]}; do

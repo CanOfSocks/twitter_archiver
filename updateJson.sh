@@ -58,7 +58,8 @@ do
 #      lineCount=$(wc -l < "${outFolder}/${twitterUN}-tweets.json.new")
 #      lineOneNew=$(sed -n '1{p;q;}' "${outFolder}/${twitterUN}-tweets.json.new")
 #      lineOneSource=$(sed -n '1{p;q;}' "${outFolder}/${twitterUN}-tweets.json")
-      if [[ $(wc -l < "${outFolder}/${twitterUN}-tweets.json.new") -eq 1 ]] && [[ $(jq -r '[.url] | @tsv' <<< $(head -1 "${outFolder}/${twitterUN}-tweets.json.new")) = $(jq -r '[.url] | @tsv' <<< $(head -1 "${outFolder}/${twitterUN}-tweets.json")) ]]; then
+      if [[ $(wc -l < "${outFolder}/${twitterUN}-tweets.json.new") -eq 1 ]] \
+       && [[ $(jq -r '[.url] | @tsv' <<< $(head -1 "${outFolder}/${twitterUN}-tweets.json.new")) = $(jq -r '[.url] | @tsv' <<< $(head -1 "${outFolder}/${twitterUN}-tweets.json")) ]]; then
         echo "Duplicate tweet downloaded - not saving to file"
       else
         cp -f "${outFolder}/${twitterUN}-tweets.json" "${outFolder}/${twitterUN}-tweets.json.bkup"
@@ -68,6 +69,6 @@ do
       fi
     fi
   fi
+  /app/scripts/getLikes.sh gawrgura "${outFolder}/likes"
   sleep $(($interval))
 done
-      if [ "$lineCount" -eq 1 ] && [[ $(jq -r '[.url] | @tsv' <<< $(head -1 "${outFolder}/${twitterUN}-tweets.json.new")) = $(jq -r '[.url] | @tsv' <<< $(head -1 "${outFolder}/${twitterUN}-tweets.json")) ]]; then
