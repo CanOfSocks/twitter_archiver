@@ -10,10 +10,10 @@ if [[ -n "${apiKey}" ]] \
  && [[ -n "${accessToken}" ]] \
  && [[ -n "${accessSec}" ]]; then
   (echo "{" > /app/scripts/.oauth.json \
-  && echo '    "consumer_key": "${apiKey}",' >> /app/scripts/.oauth.json \
-  && echo '    "consumer_secret": "${apiKey}",' >> /app/scripts/.oauth.json \
-  && echo '    "access_token": "${apiKey}",' >> /app/scripts/.oauth.json \
-  && echo '    "access_key": "${apiKey}",' >> /app/scripts/.oauth.json \
+  && echo '    "consumer_key": "'${apiKey}'",' >> /app/scripts/.oauth.json \
+  && echo '    "consumer_secret": "'${apiSed}'",' >> /app/scripts/.oauth.json \
+  && echo '    "access_token": "'${accessToken}'",' >> /app/scripts/.oauth.json \
+  && echo '    "access_key": "'${accessSec}'",' >> /app/scripts/.oauth.json \
   && echo "}" >> /app/scripts/.oauth.json) || rm /app/scripts/.oauth.json 2> /dev/null
 else
   rm /app/scripts/.oauth.json 2> /dev/null

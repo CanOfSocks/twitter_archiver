@@ -10,7 +10,7 @@ RUN mkdir -p /temp
 
 RUN git clone https://github.com/Spark-NF/twitter_media_downloader.git /temp
 RUN pip install -r /temp/requirements.txt
-RUN mv -f /temp/twitter_media_downloader.py /app/scripts/ && rm -R /temp
+RUN mv -f /temp/twitter_media_downloader.py /app/scripts/ && mv -f /temp/src /app/scripts/  && rm -R /temp
 
 COPY updateJson.sh /app/scripts/updateJson.sh
 COPY getMedia.sh /app/scripts/getMedia.sh
