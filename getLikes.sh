@@ -5,6 +5,9 @@ outFolder="${2}"
 if ! [ -d "${outFolder}/new" ]; then
     mkdir -p "${outFolder}/new"
 fi
+if ! [ -d "${outFolder}/media" ]; then
+    mkdir -p "${outFolder}/media"
+fi
 
 
 lastFile=$(ls -t "${outFolder}/media" | head -n 1) #get last file
