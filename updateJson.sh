@@ -69,6 +69,8 @@ do
       fi
     fi
   fi
-  /app/scripts/getLikes.sh gawrgura "${outFolder}/likes"
+  if [ -f "/app/scripts/.oauth.json" ]; then
+    /app/scripts/getLikes.sh "${twitterUN}" "${outFolder}/likes"
+  fi
   sleep $(($interval))
 done
