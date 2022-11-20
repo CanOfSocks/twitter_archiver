@@ -2,7 +2,12 @@
 twitterUN="${1}"
 outFolder="${2}"
 
-lastFile=$(ls -t | head -n 1) #get last file
+if ! [ -d "${outFolder}/new" ]; then
+    mkdir -p "${outFolder}/new"
+fi
+
+
+lastFile=$(ls -t "${outFolder}/media" | head -n 1) #get last file
 lastFile="${lastFile#*_(}"   #Remove before _(
 lastID="${lastFile%)_*}"    #Remove after )_ to get ID
 
