@@ -69,8 +69,8 @@ do
       fi
     fi
   fi
-  if [ -f "/app/scripts/.oauth.json" ]; then
-    /app/scripts/getLikes.sh "${twitterUN}" "${outFolder}/likes"
-  fi
+#  if [ -f "/app/scripts/twitter_media_downloader/.oauth.json" ]; then
+#    /app/scripts/getLikes.sh "${twitterUN}" "${outFolder}/likes"
+#  fi
   sleep $(($interval))
 done

@@ -5,19 +5,19 @@ if [[ -z "${interval}" ]]; then
 fi
 
 #If all API requirements exist, make file, otherwise attempt removal of any auth present
-if [[ -n "${apiKey}" ]] \
- && [[ -n "${apiSec}" ]] \
- && [[ -n "${accessToken}" ]] \
- && [[ -n "${accessSec}" ]]; then
-  (echo "{" > /app/scripts/.oauth.json \
-  && echo '    "consumer_key": "'${apiKey}'",' >> /app/scripts/.oauth.json \
-  && echo '    "consumer_secret": "'${apiSed}'",' >> /app/scripts/.oauth.json \
-  && echo '    "access_token": "'${accessToken}'",' >> /app/scripts/.oauth.json \
-  && echo '    "access_key": "'${accessSec}'",' >> /app/scripts/.oauth.json \
-  && echo "}" >> /app/scripts/.oauth.json) || rm /app/scripts/.oauth.json 2> /dev/null
-else
-  rm /app/scripts/.oauth.json 2> /dev/null
-fi
+#if [[ -n "${apiKey}" ]] \
+# && [[ -n "${apiSec}" ]] \
+# && [[ -n "${accessToken}" ]] \
+# && [[ -n "${accessSec}" ]]; then
+#  (echo "{" > /app/scripts/twitter_media_downloader/.oauth.json \
+#  && echo '    "consumer_key": "'${apiKey}'",' >> /app/scripts/twitter_media_downloader/.oauth.json \
+#  && echo '    "consumer_secret": "'${apiSec}'",' >> /app/scripts/twitter_media_downloader/.oauth.json \
+#  && echo '    "access_token": "'${accessToken}'",' >> /app/scripts/twitter_media_downloader/.oauth.json \
+#  && echo '    "access_token_secret": "'${accessSec}'",' >> /app/scripts/twitter_media_downloader/.oauth.json \
+#  && echo "}" >> /app/scripts/twitter_media_downloader/.oauth.json) || rm /app/scripts/twitter_media_downloader/.oauth.json 2> /dev/null
+#else
+#  rm /app/scripts/twitter_media_downloader/.oauth.json 2> /dev/null
+#fi
 
 unameA=($usernames)
 
