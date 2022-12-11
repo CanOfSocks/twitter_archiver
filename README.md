@@ -18,7 +18,8 @@ How to run:
 Where `interval` is the time to sleep between checking for new tweets/spaces (default 60 seconds),
 `usernames` is a list of twitter usernames to monitor, with space separation
 and `$HOME/Twitter` is where any files will be saved.
-
+______________
+Find on [docker hub](https://hub.docker.com/r/canofsocks/twitter_archiver)
 ______________
 Known issues:
 
